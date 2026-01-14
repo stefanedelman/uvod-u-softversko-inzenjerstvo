@@ -12,7 +12,16 @@ class CategoryFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => fake()->name(),
+            'name' => fake()->randomElement([
+                'Snoubordovi',
+                'Čizme',
+                'Vezovi',
+                'Kacige',
+                'Naočare',
+                'Jakne',
+                'Pantalone',
+                'Rukavice',
+            ]),
         ];
     }
 }

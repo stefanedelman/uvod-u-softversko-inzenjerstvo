@@ -14,9 +14,9 @@ class OrderFactory extends Factory
     {
         return [
             'user_id' => User::factory(),
-            'order_date' => fake()->dateTime(),
-            'status' => fake()->regexify('[A-Za-z0-9]{50}'),
-            'total_price' => fake()->randomFloat(2, 0, 99999999.99),
+            'order_date' => fake()->dateTimeBetween('-1 month', 'now'),
+            'status' => fake()->randomElement(['na_cekanju', 'u_obradi', 'poslato', 'otkazano']),
+            'total_price' => fake()->randomFloat(2, 100, 2000),
         ];
     }
 }

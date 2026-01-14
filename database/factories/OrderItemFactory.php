@@ -16,8 +16,8 @@ class OrderItemFactory extends Factory
         return [
             'order_id' => Order::factory(),
             'product_id' => Product::factory(),
-            'quantity' => fake()->numberBetween(-10000, 10000),
-            'unit_price' => fake()->randomFloat(2, 0, 999999.99),
+            'quantity' => fake()->numberBetween(1, 5),
+            'unit_price' => fake()->randomFloat(2, 50, 800),
         ];
     }
 }

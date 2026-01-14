@@ -14,10 +14,10 @@ class ProductFactory extends Factory
     {
         return [
             'category_id' => Category::factory(),
-            'name' => fake()->name(),
-            'description' => fake()->text(),
-            'price' => fake()->randomFloat(2, 0, 999999.99),
-            'stock_quantity' => fake()->numberBetween(-10000, 10000),
+            'name' => fake()->randomElement(['Burton', 'Ride', 'K2', 'Salomon', 'Jones']).' '.fake()->word(),
+            'description' => fake()->paragraph(),
+            'price' => fake()->randomFloat(2, 50, 800),
+            'stock_quantity' => fake()->numberBetween(0, 50),
         ];
     }
 }
