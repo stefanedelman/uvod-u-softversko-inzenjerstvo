@@ -1,0 +1,42 @@
+models:
+  Category:
+    name: string:50
+    relationships:
+      hasMany: Product
+
+  Product:
+    category_id: id foreign:categories
+    name: string
+    description: text nullable
+    price: decimal:8,2
+    stock_quantity: integer
+    relationships:
+      belongsTo: Category
+      hasMany: OrderItem
+
+  Order:
+    user_id: id foreign:users
+    order_date: timestamp
+    status: string:50 default:'na_cekanju'
+    total_price: decimal:10,2
+    relationships:
+      belongsTo: User
+      hasMany: OrderItem
+
+  OrderItem:
+    order_id: id foreign:orders
+    product_id: id foreign:products
+    quantity: integer
+    unit_price: decimal:8,2
+    relationships:
+      belongsTo: Order, Product
+
+controllers:
+  Category:
+    resource: true
+  Product:
+    resource: true
+  Order:
+    resource: true
+  OrderItem:
+    resource: true
