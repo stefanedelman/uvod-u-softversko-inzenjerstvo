@@ -92,4 +92,22 @@ class OrderController extends Controller
     {
         return $order->load('orderItems.product');
     }
+
+    /**
+     * USE CASE 2.2.5: Obrada porudžbine (Admin)
+     * Promena statusa porudžbine
+     */
+    public function update(Request $request, Order $order)
+    {
+        $validated = $request->validate([
+            'status' => 'required|in:na_cekanju,u_obradi,poslato,otkazano',
+        ]);
+
+        $order->update($validated);
+
+        return response()->json([
+            'message' => 'Status porudžbine ažuriran na: '.$validated['status'],
+            'data' => $order,
+        ]);
+    }
 }
