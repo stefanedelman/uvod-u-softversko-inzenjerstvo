@@ -4,14 +4,24 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\OrderItemController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\WebController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// =============================================
+// WEB FRONTEND ROUTES (Blade Views)
+// =============================================
+
+Route::get('/', [WebController::class, 'home']);
+Route::get('/katalog', [WebController::class, 'katalog']);
+Route::get('/proizvod/{product}', [WebController::class, 'proizvod']);
+Route::get('/korpa', [WebController::class, 'korpa']);
+Route::post('/korpa/dodaj', [WebController::class, 'dodajUKorpu']);
+Route::delete('/korpa/ukloni/{productId}', [WebController::class, 'ukloniIzKorpe']);
+Route::get('/checkout', [WebController::class, 'checkout']);
+Route::post('/checkout', [WebController::class, 'processCheckout']);
 
 // =============================================
-// PUBLIC ROUTES (Use Cases za kupce)
+// API ROUTES (JSON responses)
 // =============================================
 
 // USE CASE 2.2.2: Pregled i pretraga proizvoda
