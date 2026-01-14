@@ -41,7 +41,7 @@ jobs:
         DB_DATABASE: database/database.sqlite
       run: |
         php artisan migrate --force
-        php artisan test
+        vendor/bin/phpunit
 
     - name: Run Pint (Code Style)
       run: ./vendor/bin/pint --test
