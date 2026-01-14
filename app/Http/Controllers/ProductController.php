@@ -18,7 +18,7 @@ class ProductController extends Controller
 
         // Pretraga po nazivu (ako je prosleđen search parametar)
         if ($request->has('search')) {
-            $query->where('name', 'like', '%' . $request->search . '%');
+            $query->where('name', 'like', '%'.$request->search.'%');
         }
 
         $products = $query->get();
@@ -38,7 +38,7 @@ class ProductController extends Controller
         $products = $category->products;
 
         return response()->json([
-            'message' => 'Proizvodi iz kategorije: ' . $category->name,
+            'message' => 'Proizvodi iz kategorije: '.$category->name,
             'category' => $category->name,
             'data' => $products,
         ]);
