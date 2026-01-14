@@ -68,6 +68,10 @@
                                 <i class="bi bi-person-circle"></i> {{ Auth::user()->name }}
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end">
+                                @if(Auth::user()->is_admin)
+                                    <li><a class="dropdown-item" href="{{ route('admin.dashboard') }}"><i class="bi bi-speedometer2"></i> Admin Panel</a></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                @endif
                                 <li><a class="dropdown-item" href="{{ route('profile.edit') }}">Profil</a></li>
                                 <li><hr class="dropdown-divider"></li>
                                 <li>

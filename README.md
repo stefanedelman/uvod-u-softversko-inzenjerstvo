@@ -90,6 +90,13 @@ tests/Feature/            # Feature testovi
 | `/checkout` | Završetak narudžbine |
 | `/login` | Prijava korisnika |
 | `/register` | Registracija korisnika |
+| `/admin` | Admin panel (samo za admine) |
+
+## 👤 Admin pristup
+
+Za testiranje admin panela, koristi:
+- **Email:** `admin@webshop.com`
+- **Lozinka:** `admin123`
 
 ## ✅ Implementirani Use Case-ovi
 
@@ -97,6 +104,7 @@ tests/Feature/            # Feature testovi
 - **UC 2.2.2** - Pregled i filtriranje kataloga proizvoda
 - **UC 2.2.3** - Dodavanje proizvoda u korpu
 - **UC 2.2.4** - Kreiranje narudžbine
+- **Admin panel** - CRUD za proizvode, kategorije, narudžbine i korisnike
 
 ## 👤 Autor
 

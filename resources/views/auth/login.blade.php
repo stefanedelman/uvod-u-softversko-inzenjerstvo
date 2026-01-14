@@ -2,6 +2,15 @@
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
 
+    <!-- Test Credentials -->
+    <div class="mb-4 p-4 bg-gray-100 rounded-lg">
+        <p class="text-sm font-semibold text-gray-700 mb-2">🧪 Test kredencijali:</p>
+        <div class="text-sm text-gray-600">
+            <p><strong>Admin:</strong> admin@webshop.com / admin123</p>
+            <p><strong>Korisnik:</strong> Registruj se ili koristi factory korisnike (password)</p>
+        </div>
+    </div>
+
     <form method="POST" action="{{ route('login') }}">
         @csrf
 

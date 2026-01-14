@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\OrderItemController;
@@ -67,6 +68,40 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+// ============================================
+// ADMIN PANEL RUTE
+// ============================================
+
+Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
+    // Dashboard
+    Route::get('/', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+
+    // Products CRUD
+    Route::get('/products', [AdminController::class, 'products'])->name('admin.products');
+    Route::get('/products/create', [AdminController::class, 'createProduct'])->name('admin.products.create');
+    Route::post('/products', [AdminController::class, 'storeProduct'])->name('admin.products.store');
+    Route::get('/products/{product}/edit', [AdminController::class, 'editProduct'])->name('admin.products.edit');
+    Route::put('/products/{product}', [AdminController::class, 'updateProduct'])->name('admin.products.update');
+    Route::delete('/products/{product}', [AdminController::class, 'deleteProduct'])->name('admin.products.delete');
+
+    // Categories CRUD
+    Route::get('/categories', [AdminController::class, 'categories'])->name('admin.categories');
+    Route::get('/categories/create', [AdminController::class, 'createCategory'])->name('admin.categories.create');
+    Route::post('/categories', [AdminController::class, 'storeCategory'])->name('admin.categories.store');
+    Route::get('/categories/{category}/edit', [AdminController::class, 'editCategory'])->name('admin.categories.edit');
+    Route::put('/categories/{category}', [AdminController::class, 'updateCategory'])->name('admin.categories.update');
+    Route::delete('/categories/{category}', [AdminController::class, 'deleteCategory'])->name('admin.categories.delete');
+
+    // Orders
+    Route::get('/orders', [AdminController::class, 'orders'])->name('admin.orders');
+    Route::get('/orders/{order}', [AdminController::class, 'showOrder'])->name('admin.orders.show');
+    Route::patch('/orders/{order}/status', [AdminController::class, 'updateOrderStatus'])->name('admin.orders.status');
+
+    // Users
+    Route::get('/users', [AdminController::class, 'users'])->name('admin.users');
+    Route::patch('/users/{user}/toggle-admin', [AdminController::class, 'toggleAdmin'])->name('admin.users.toggle');
 });
 
 require __DIR__.'/auth.php';

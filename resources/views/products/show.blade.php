@@ -43,9 +43,8 @@
             <p class="lead">{{ $product->description }}</p>
 
             @if($product->stock_quantity > 0)
-            <form action="{{ url('/korpa/dodaj') }}" method="POST" class="mt-4">
+            <form action="{{ route('korpa.dodaj', $product) }}" method="POST" class="mt-4">
                 @csrf
-                <input type="hidden" name="product_id" value="{{ $product->id }}">
                 <div class="row g-3 align-items-center">
                     <div class="col-auto">
                         <label class="form-label mb-0">Količina:</label>

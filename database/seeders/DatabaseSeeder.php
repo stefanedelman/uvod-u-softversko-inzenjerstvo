@@ -20,6 +20,8 @@ class DatabaseSeeder extends Seeder
         $admin = User::factory()->create([
             'name' => 'Admin User',
             'email' => 'admin@webshop.com',
+            'password' => bcrypt('admin123'),
+            'is_admin' => true,
         ]);
 
         // 2. Kreiranje test kupaca

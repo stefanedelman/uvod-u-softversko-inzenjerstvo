@@ -66,25 +66,22 @@ class WebController extends Controller
     /**
      * Dodaj u korpu
      */
-    public function dodajUKorpu(Request $request)
+    public function dodajUKorpu(Request $request, Product $product)
     {
-        $request->validate([
-            'product_id' => 'required|exists:products,id',
-            'quantity' => 'required|integer|min:1',
-        ]);
+        $quantity = $request->input('quantity', 1);
 
-        $product = Product::findOrFail($request->product_id);
         $cart = session()->get('cart', []);
 
         // Ako proizvod već postoji u korpi, povećaj količinu
         if (isset($cart[$product->id])) {
-            $cart[$product->id]['quantity'] += $request->quantity;
+            $cart[$product->id]['quantity'] += $quantity;
         } else {
             $cart[$product->id] = [
                 'product_id' => $product->id,
                 'name' => $product->name,
                 'price' => $product->price,
-                'quantity' => $request->quantity,
+                'image' => $product->image,
+                'quantity' => $quantity,
             ];
         }
 
