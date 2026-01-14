@@ -19,6 +19,7 @@ SnowShop je e-commerce web aplikacija za prodaju snowboard opreme. Aplikacija om
 
 - **Backend:** Laravel 11 (PHP 8.2)
 - **Frontend:** Blade Templates + Bootstrap 5
+- **Autentifikacija:** Laravel Breeze
 - **Baza:** MySQL / SQLite
 - **Testiranje:** PHPUnit
 - **CI/CD:** GitHub Actions
@@ -34,16 +35,19 @@ cd uvod-u-softversko-inzenjerstvo
 # 2. Instaliraj PHP zavisnosti
 composer install
 
-# 3. Kopiraj environment fajl
+# 3. Instaliraj NPM zavisnosti i builduj assets
+npm install && npm run build
+
+# 4. Kopiraj environment fajl
 cp .env.example .env
 
-# 4. Generiši application key
+# 5. Generiši application key
 php artisan key:generate
 
-# 5. Podesi bazu u .env fajlu, zatim pokreni migracije
+# 6. Podesi bazu u .env fajlu, zatim pokreni migracije
 php artisan migrate --seed
 
-# 6. Pokreni development server
+# 7. Pokreni development server
 php artisan serve
 ```
 
@@ -84,9 +88,12 @@ tests/Feature/            # Feature testovi
 | `/proizvod/{id}` | Detalji proizvoda |
 | `/korpa` | Korpa za kupovinu |
 | `/checkout` | Završetak narudžbine |
+| `/login` | Prijava korisnika |
+| `/register` | Registracija korisnika |
 
 ## ✅ Implementirani Use Case-ovi
 
+- **UC 2.2.1** - Registracija i prijava korisnika
 - **UC 2.2.2** - Pregled i filtriranje kataloga proizvoda
 - **UC 2.2.3** - Dodavanje proizvoda u korpu
 - **UC 2.2.4** - Kreiranje narudžbine

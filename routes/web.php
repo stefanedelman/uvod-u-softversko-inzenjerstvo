@@ -4,57 +4,69 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\OrderItemController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\WebController;
 use Illuminate\Support\Facades\Route;
 
-// =============================================
-// WEB FRONTEND ROUTES (Blade Views)
-// =============================================
+// ============================================
+// WEB RUTE (Frontend - Blade views)
+// ============================================
 
-Route::get('/', [WebController::class, 'home']);
-Route::get('/katalog', [WebController::class, 'katalog']);
-Route::get('/proizvod/{product}', [WebController::class, 'proizvod']);
-Route::get('/korpa', [WebController::class, 'korpa']);
-Route::post('/korpa/dodaj', [WebController::class, 'dodajUKorpu']);
-Route::delete('/korpa/ukloni/{productId}', [WebController::class, 'ukloniIzKorpe']);
-Route::get('/checkout', [WebController::class, 'checkout']);
-Route::post('/checkout', [WebController::class, 'processCheckout']);
+Route::get('/', [WebController::class, 'home'])->name('home');
+Route::get('/katalog', [WebController::class, 'katalog'])->name('katalog');
+Route::get('/proizvod/{product}', [WebController::class, 'proizvod'])->name('proizvod');
 
-// =============================================
-// API ROUTES (JSON responses)
-// =============================================
+// Korpa rute
+Route::get('/korpa', [WebController::class, 'korpa'])->name('korpa');
+Route::post('/korpa/dodaj/{product}', [WebController::class, 'dodajUKorpu'])->name('korpa.dodaj');
+Route::delete('/korpa/ukloni/{product}', [WebController::class, 'ukloniIzKorpe'])->name('korpa.ukloni');
+Route::get('/checkout', [WebController::class, 'checkout'])->name('checkout');
+Route::post('/checkout', [WebController::class, 'processCheckout'])->name('checkout.process');
 
-// USE CASE 2.2.2: Pregled i pretraga proizvoda
+// ============================================
+// API RUTE (JSON responses)
+// ============================================
+
+// Products API
 Route::get('/products', [ProductController::class, 'index']);
-Route::get('/products/category/{category}', [ProductController::class, 'byCategory']);
 Route::get('/products/{product}', [ProductController::class, 'show']);
-
-// USE CASE 2.2.3: Kreiranje porudžbine
-Route::post('/order', [OrderController::class, 'store']);
-
-// Kategorije (public read)
-Route::get('/categories', [CategoryController::class, 'index']);
-Route::get('/categories/{category}', [CategoryController::class, 'show']);
-
-// =============================================
-// ADMIN ROUTES (Use Case 2.2.4 & 2.2.5)
-// =============================================
-
-// Admin: Upravljanje kategorijama
-Route::post('/categories', [CategoryController::class, 'store']);
-Route::put('/categories/{category}', [CategoryController::class, 'update']);
-Route::delete('/categories/{category}', [CategoryController::class, 'destroy']);
-
-// Admin: Upravljanje proizvodima (Use Case 2.2.4)
 Route::post('/products', [ProductController::class, 'store']);
 Route::put('/products/{product}', [ProductController::class, 'update']);
 Route::delete('/products/{product}', [ProductController::class, 'destroy']);
 
-// Admin: Upravljanje porudžbinama (Use Case 2.2.5)
+// Categories API
+Route::get('/categories', [CategoryController::class, 'index']);
+Route::get('/categories/{category}', [CategoryController::class, 'show']);
+Route::post('/categories', [CategoryController::class, 'store']);
+Route::put('/categories/{category}', [CategoryController::class, 'update']);
+Route::delete('/categories/{category}', [CategoryController::class, 'destroy']);
+
+// Orders API
 Route::get('/orders', [OrderController::class, 'index']);
 Route::get('/orders/{order}', [OrderController::class, 'show']);
+Route::post('/order', [OrderController::class, 'store']);
 Route::put('/orders/{order}', [OrderController::class, 'update']);
+Route::delete('/orders/{order}', [OrderController::class, 'destroy']);
 
-// Admin: Stavke porudžbine
-Route::get('/orders/{order}/items', [OrderItemController::class, 'index']);
-Route::post('/orders/{order}/items', [OrderItemController::class, 'store']);
+// Order Items API
+Route::get('/order-items', [OrderItemController::class, 'index']);
+Route::get('/order-items/{orderItem}', [OrderItemController::class, 'show']);
+Route::post('/order-items', [OrderItemController::class, 'store']);
+Route::put('/order-items/{orderItem}', [OrderItemController::class, 'update']);
+Route::delete('/order-items/{orderItem}', [OrderItemController::class, 'destroy']);
+
+// ============================================
+// BREEZE AUTH RUTE
+// ============================================
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+require __DIR__.'/auth.php';

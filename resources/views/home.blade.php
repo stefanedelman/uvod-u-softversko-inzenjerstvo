@@ -1,6 +1,6 @@
-@extends('layouts.app')
+@extends('layouts.shop')
 
-@section('title', 'Početna - Snowboard Shop')
+@section('title', 'Početna')
 
 @section('content')
 <div class="container">

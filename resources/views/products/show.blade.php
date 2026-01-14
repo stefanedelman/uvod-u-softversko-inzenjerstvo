@@ -1,6 +1,6 @@
-@extends('layouts.app')
+@extends('layouts.shop')
 
-@section('title', $product->name . ' - Snowboard Shop')
+@section('title', $product->name)
 
 @section('content')
 <div class="container">
