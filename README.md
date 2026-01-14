@@ -20,10 +20,7 @@ SnowShop je e-commerce web aplikacija za prodaju snowboard opreme. Aplikacija om
 ---
 
 ## 🔗 Link ka GitHub repozitorijumu
-
-**GitHub:** https://github.com/VAŠE-KORISNIČKO-IME/uvod-u-softversko-inzenjerstvo
-
-*(Zamenite sa vašim pravim linkom)*
+https://github.com/stefanedelman/uvod-u-softversko-inzenjerstvo
 
 ---
 
@@ -381,78 +378,6 @@ public function test_product_belongs_to_category(): void
 ```
 
 **Namena:** Verifikacija ispravnosti Eloquent relacija i atributa modela.
-
----
-
-## 📸 Screenshot-ovi aplikacije
-
-*(Dodajte screenshot-ove sledećih ekrana)*
-
-### 1. Početna stranica
-![Početna stranica](screenshots/home.png)
-
-### 2. Katalog proizvoda
-![Katalog](screenshots/katalog.png)
-
-### 3. Detalji proizvoda
-![Proizvod](screenshots/proizvod.png)
-
-### 4. Korpa
-![Korpa](screenshots/korpa.png)
-
-### 5. Admin Dashboard
-![Admin Dashboard](screenshots/admin-dashboard.png)
-
-### 6. Admin - Lista proizvoda
-![Admin Proizvodi](screenshots/admin-products.png)
-
----
-
-## 📦 Instalacija
-
-```bash
-# 1. Kloniraj repozitorijum
-git clone https://github.com/your-username/uvod-u-softversko-inzenjerstvo.git
-cd uvod-u-softversko-inzenjerstvo
-
-# 2. Instaliraj PHP zavisnosti
-composer install
-
-# 3. Instaliraj NPM zavisnosti i builduj assets
-npm install && npm run build
-
-# 4. Kopiraj environment fajl
-cp .env.example .env
-
-# 5. Generiši application key
-php artisan key:generate
-
-# 6. Podesi bazu u .env fajlu, zatim pokreni migracije
-php artisan migrate --seed
-
-# 7. Pokreni development server
-php artisan serve
-```
-
-Aplikacija će biti dostupna na: `http://localhost:8000`
-
----
-
-## 🧪 Testiranje
-
-```bash
-# Pokreni sve testove
-vendor/bin/phpunit
-
-# Proveri code style
-vendor/bin/pint --test
-```
-
-### Rezultati testova
-- **Ukupno testova:** 32
-- **Assertions:** 76
-- **Status:** ✅ Svi prolaze
-
 ---
 
 ## 🔗 Glavne rute
@@ -498,9 +423,6 @@ Projekat je uspešno implementiran korišćenjem Laravel 11 framework-a sa svim 
 - ✅ 32 automatizovana testa
 - ✅ CI/CD pipeline sa GitHub Actions
 
----
-
-*Projekat izrađen za potrebe predmeta Uvod u Softversko Inženjerstvo, FON, 2025/2026*
 
 ## ✅ Implementirani Use Case-ovi
 
@@ -511,9 +433,3 @@ Projekat je uspešno implementiran korišćenjem Laravel 11 framework-a sa svim 
 - **Admin panel** - CRUD za proizvode, kategorije, narudžbine i korisnike
 
 ## 👤 Autor
-
-Student Fakulteta organizacionih nauka
-
-## 📄 Licenca
-
-MIT License
