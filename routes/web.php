@@ -9,12 +9,3 @@ Route::get('/', function () {
 
 // Ruta za kreiranje porudžbine (Use Case: Kreiranje porudžbine)
 Route::post('/order', [OrderController::class, 'store']);
-
-
-
-
-
-
-
-
-

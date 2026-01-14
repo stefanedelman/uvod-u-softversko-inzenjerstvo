@@ -2,9 +2,9 @@
 
 namespace Tests\Feature;
 
+use App\Models\Category;
 use App\Models\Product;
 use App\Models\User;
-use App\Models\Category;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -20,11 +20,11 @@ class OrderTest extends TestCase
         // 1. Arrange (Priprema)
         $user = User::factory()->create();
         $category = Category::factory()->create();
-        
+
         $product = Product::factory()->create([
             'category_id' => $category->id,
             'price' => 100,
-            'stock_quantity' => 10
+            'stock_quantity' => 10,
         ]);
 
         // 2. Act (Akcija) - šaljemo zahtev na rutu koju smo napravili
@@ -33,9 +33,9 @@ class OrderTest extends TestCase
             'items' => [
                 [
                     'product_id' => $product->id,
-                    'quantity' => 2
-                ]
-            ]
+                    'quantity' => 2,
+                ],
+            ],
         ]);
 
         // 3. Assert (Provera)
@@ -61,10 +61,10 @@ class OrderTest extends TestCase
     {
         $user = User::factory()->create();
         $category = Category::factory()->create();
-        
+
         $product = Product::factory()->create([
             'category_id' => $category->id,
-            'stock_quantity' => 5
+            'stock_quantity' => 5,
         ]);
 
         $response = $this->actingAs($user)->postJson('/order', [
@@ -72,9 +72,9 @@ class OrderTest extends TestCase
             'items' => [
                 [
                     'product_id' => $product->id,
-                    'quantity' => 10 // Tražimo više nego što ima
-                ]
-            ]
+                    'quantity' => 10, // Tražimo više nego što ima
+                ],
+            ],
         ]);
 
         $response->assertStatus(400); // Očekujemo grešku

@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
-use App\Models\Product;
 use App\Models\OrderItem;
+use App\Models\Product;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class OrderController extends Controller
 {
@@ -51,10 +51,10 @@ class OrderController extends Controller
             // 3. Petlja kroz stavke korpe
             foreach ($validated['items'] as $item) {
                 $product = Product::findOrFail($item['product_id']);
-                
+
                 // Provera zaliha
                 if ($product->stock_quantity < $item['quantity']) {
-                    throw new \Exception("Nema dovoljno proizvoda: " . $product->name);
+                    throw new \Exception('Nema dovoljno proizvoda: '.$product->name);
                 }
 
                 // Kreiranje stavke
@@ -78,11 +78,12 @@ class OrderController extends Controller
 
             return response()->json([
                 'message' => 'Porudžbina uspešno kreirana!',
-                'data' => $order->load('orderItems')
+                'data' => $order->load('orderItems'),
             ], 201);
 
         } catch (\Exception $e) {
             DB::rollBack();
+
             return response()->json(['error' => $e->getMessage()], 400);
         }
     }
